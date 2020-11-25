@@ -7,9 +7,10 @@ from mutagen.mp3 import MP3
 import os
 from django.conf import settings
 from django.core.files.storage import FileSystemStorage
+from pathlib import Path
 
 
-home_dir = os.path.expanduser("~")
+home_dir = home = str(Path.home())
 
 
 def upload(request):
