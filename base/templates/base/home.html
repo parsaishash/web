@@ -62,7 +62,7 @@
 					{% if i.format == 'video' %}
 						<div class="file-container">
 							<a href="{% url 'base:down' i.path %}">
-							<img src="{% static 'base/ed/video.png' %}" width="30" height="30">
+							<img src="{% static 'base/video.png' %}" width="30" height="30">
 							{{ i.title }}</a>
 							<hr>
 							
@@ -75,10 +75,10 @@
 					{% if i.format == 'document' %}
 						<div class="file-container">
 							<a href="{% url 'base:down' i.path %}">
-							<img src="{% static 'base/ed/pdf.png' %}" width="30" height="30">
+							<img src="{% static 'base/pdf.png' %}" width="30" height="30">
 							{{ i.title }}</a>
 							<hr>
-							<a href="#" class="o"><img src="{{ STATIC_PREFIX }}base/ed/icons8-menu-50.png" width="30" height="30"></a>
+							<a href="#" class="o"><img src="{{ STATIC_PREFIX }}base/icons8-menu-50.png" width="30" height="30"></a>
 						</div>
 					{% endif %}
 			{% endfor %}
@@ -88,12 +88,12 @@
 
 						<div class="file-container">
 							<audio controls="">
-								<source src="{{ STATIC_PREFIX }}base/ed/{{ i.path }}" type="">
+								<source src="{{ STATIC_PREFIX }}base/{{ i.path }}" type="">
 							</audio>
 							<hr>
 							<div class="mar-au">
 							<a href="{% url 'base:down' i.path %}">{{ i.title }}</a>
-							<a href="#" class="o"><img src="{{ STATIC_PREFIX }}base/ed/icons8-menu-50.png" width="30" height="30"></a></div>
+							<a href="#" class="o"><img src="{{ STATIC_PREFIX }}base/icons8-menu-50.png" width="30" height="30"></a></div>
 						</div>
 					{% endif %}
 			{% endfor %}
@@ -105,7 +105,7 @@
 					
 						<div class="image-container">
 							<div>
-							<img src="{{ STATIC_PREFIX }}base/ed/{{ i.title }}">
+							<img src="{{ STATIC_PREFIX }}base/{{ i.title }}">
 
 							<hr>
 							<a href="{% url 'base:down' i.path %}">
@@ -120,7 +120,7 @@
 					{% if i.format == 'directory' %}
 
 						<div class="file-container">
-							<img src="{{ STATIC_PREFIX }}base/ed/folder.png" width="30" height="30">
+							<img src="{{ STATIC_PREFIX }}base/folder.png" width="30" height="30">
 							<a href="{% url 'base:go_to_directory' i.path type %}">{{ i.title }}
 							</a>
 						</div>
@@ -130,10 +130,10 @@
 					{% if i.format == 'sub' %}
 						<div class="file-container">
 							<a href="{% url 'base:down' i.path %}">
-							<img src="{% static 'base/ed/pdf.png' %}" width="30" height="30">
+							<img src="{% static 'base/pdf.png' %}" width="30" height="30">
 							{{ i.title }}</a>
 							<hr>
-							<a href="#" class="o"><img src="{{ STATIC_PREFIX }}base/ed/icons8-menu-50.png" width="30" height="30"></a>
+							<a href="#" class="o"><img src="{{ STATIC_PREFIX }}base/icons8-menu-50.png" width="30" height="30"></a>
 						</div>
 					{% endif %}
 			{% endfor %}
