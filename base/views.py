@@ -9,6 +9,9 @@ from django.conf import settings
 from django.core.files.storage import FileSystemStorage
 
 
+home_dir = os.path.expanduser("~")
+
+
 def upload(request):
 	fs = FileSystemStorage()
 	filename = fs.save(request.FILES['myfile'].name, request.FILES['myfile'])
@@ -129,7 +132,7 @@ def ser(directory):
 
 
 
-files_dir = '/home/parsa/web/base/static/base/ser'
+files_dir = '{}/web/base/static/base/ser'.format(home_dir)
 def go_to_directory(request, path, wich_type):
 	print('this pa',path)
 	files_dir = ('/').join(path.split(' > '))
@@ -165,7 +168,7 @@ def home(request, wich_type):
 	global files_dir
 	
 	# add all type files from directory
-	files, musics, images, video, document = files_finder('/home/parsa/web/base/static/base/ed')
+	files, musics, images, video, document = files_finder('{}/web/base/static/base/ed'.format(home_dir))
 
 	# make title start with captal leter for templates
 	folder_type = wich_type[0].capitalize() + wich_type[1:]
@@ -188,7 +191,7 @@ def home(request, wich_type):
 
 	elif wich_type == 'serials':
 		print(files_dir)
-		files, dir_path, video, sub = ser('/home/parsa/web/base/static/base/ser')
+		files, dir_path, video, sub = ser('{}/web/base/static/base/ser'.format(home_dir))
 		wich_type =  dir_path
 		
 
