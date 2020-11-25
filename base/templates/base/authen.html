@@ -1,0 +1,26 @@
+{% load static %}
+<HTML>
+    <head>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="{% static 'base/st.css' %}">
+    </head>
+    <body>
+    	<div class="log">
+    		<label><h3>Login to your drive</h3></label>
+	    	<form action="{% url 'base:wel' %}" id="ch" method="post">
+	    		{% csrf_token %}
+	    		<input type="username" placeholder="Username" name="username">
+	    		<br>
+	    		<br>
+	    		<input type="password" placeholder="Password" name="password">
+				<br>
+				<br>
+
+	    		<input type="submit" value="Login">
+
+	    	</form>
+    	</div>
+		
+    </body>
+</HTML>
+

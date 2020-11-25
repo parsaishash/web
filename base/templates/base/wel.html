@@ -1,0 +1,67 @@
+{% load static %}
+{% get_static_prefix as STATIC_PREFIX %}
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="icon" href="{% static 'base/bash.png' %}">
+	<title>{{ type }}</title>
+	<meta charset="UTF-8">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="{% static 'base/st.css' %}">
+</head>
+<body>
+
+	<div class="vertical-menu">
+		<a href="{% url 'base:wel' %}" class='active'>Home</a>
+
+
+		{% if type == 'Musics' %}
+			<a href="{% url 'base:home' 'musics' %}" class='active'>Music</a>
+		{% else %}
+			<a href="{% url 'base:home' 'musics' %}">Music</a>
+		{% endif %}
+
+
+		{% if type == 'Images' %}
+			<a href="{% url 'base:home' 'images' %}" class='active'>Images</a>
+		{% else %}
+			<a href="{% url 'base:home' 'images' %}">Images</a>
+		{% endif %}
+
+
+		{% if type == 'Document' %}
+			<a href="{% url 'base:home' 'document' %}" class='active'>Docs</a>
+		{% else %}
+			<a href="{% url 'base:home' 'document' %}">Docs</a>
+		{% endif %}
+
+
+		{% if type == 'Video' %}
+			<a href="{% url 'base:home' 'video' %}" class='active'>Video</a>
+		{% else %}
+			<a href="{% url 'base:home' 'video' %}">Video</a>
+		{% endif %}
+
+		{% if type == 'Serials' %}
+			<a href="{% url 'base:home' 'serials' %}" class='active'>Serials</a>
+		{% else %}
+			<a href="{% url 'base:home' 'serials' %}">Serials</a>
+		{% endif %}
+
+	</div>
+
+	<div class="chat-container-2">
+		<h2>Home</h2>
+		<hr>
+		
+		
+		<br>
+		
+		<form action="{% url 'base:upload' %}" method="post" enctype="multipart/form-data">
+			{% csrf_token %}
+			<input type="file" name="myfile" id="myfile" />
+			<button type="submit" class="btn btn-success" value="Upload">Upload</button>
+		</form>
+
+	</div>
+</body>
