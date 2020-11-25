@@ -12,6 +12,10 @@ then for serving your files you have to option !
 		~/web/base/static/base/ed
 	OR for best serving for your movies and especially your serials you can make folder for each serials or movie group in this directory:
 		~/web/base/static/base/ser
-
+for run it just open your terminal and run :
+	python3 manage.py runserver
+	
+note !!!!
+	for run this project you should have python3 with django framework install on that (also mutagen & PIL packages)
 
 hope you enjoy that :)
