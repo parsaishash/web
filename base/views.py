@@ -120,7 +120,7 @@ def ser(directory):
 				if entry.path[-3:] in ['mp4', 'mkv']:
 					add_file_ser(entry, 'video')
 
-				elif entry.path[-3:] in ['srt']:
+				elif entry.path[-3:] in ['srt', 'pdf']:
 					add_file_ser(entry, 'sub')
 
 
@@ -160,7 +160,7 @@ def home(request, wich_type):
 	global files_dir
 
 	# add all type files from directory
-	files, musics, images, video, document = files_finder('{}/web/base/static/base/ed'.format(home_dir))
+	files, musics, images, video, document = files_finder('{}/web/base/static/base/ed'.format('/home/parsa'))
 
 	# make title start with captal leter for templates
 	folder_type = wich_type[0].capitalize() + wich_type[1:]
@@ -186,7 +186,7 @@ def home(request, wich_type):
 		if os.path.isdir('/media/parsa/Elements'):
 			files, dir_path, video, sub = ser('/media/parsa/Elements')
 		else:
-			files, dir_path, video, sub = ser('{}/web/base/static/base/ser'.format(home_dir))
+			files, dir_path, video, sub = ser('{}/web/base/static/base/ser'.format('/home/parsa'))
 
 		wich_type =  dir_path
 
