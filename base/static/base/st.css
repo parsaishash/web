@@ -30,12 +30,12 @@ audio {
 .vertical-menu a {
   float: right;
   color: #f2f2f2;
-  text-align: center;
   padding: 10% 42px;
   text-decoration: none;
   font-size: 15px;
   border-bottom-right-radius: 6px;
   border-top-right-radius: 6px;
+  width: 100%;
 }
 
 
@@ -115,14 +115,7 @@ audio {
 
 
 
-.file-container {
-  border-radius: 10px;
-  background-color: rgb(230, 230, 230);
-  position: relative;
-  display: flex;
-  padding: 10px;
-  margin: 5px;
-}
+
 
 .image-container {
   background-color: rgb(230, 230, 230);
@@ -136,16 +129,32 @@ audio {
 .image-container img {
   border-radius: 6px;
   padding: all;
-
+  word-wrap: break-word;
   width: auto;
   height: 130px;
   max-width: 100%;
 }
 
-a.o {
-  visibility: hidden;
+.image-container a {
+  flex-wrap: wrap;
+  flex-direction: row;
 }
 
+
+
+.file-container {
+  border-radius: 10px;
+  background-color: rgb(230, 230, 230);
+  position: relative;
+  display: flex;
+  padding: 10px;
+  margin: 5px;
+  box-shadow: 3px 3px 3px #aaaaaa;
+}
+
+.file-container a {
+  word-wrap: 20px;
+}
 
 .file-container:hover {
   background-color: rgb(230, 236, 248);

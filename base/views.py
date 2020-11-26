@@ -160,7 +160,7 @@ def home(request, wich_type):
 	global files_dir
 
 	# add all type files from directory
-	files, musics, images, video, document = files_finder('{}/web/base/static/base/ed'.format('/home/parsa'))
+	files, musics, images, video, document = files_finder('{}/web/base/static/base/ed'.format('/Users/pegah2'))
 
 	# make title start with captal leter for templates
 	folder_type = wich_type[0].capitalize() + wich_type[1:]
@@ -186,7 +186,7 @@ def home(request, wich_type):
 		if os.path.isdir('/media/parsa/Elements'):
 			files, dir_path, video, sub = ser('/media/parsa/Elements')
 		else:
-			files, dir_path, video, sub = ser('{}/web/base/static/base/ser'.format('/home/parsa'))
+			files, dir_path, video, sub = ser('{}/web/base/static/base/ser'.format('/Users/pegah2'))
 
 		wich_type =  dir_path
 

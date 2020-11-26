@@ -71,7 +71,6 @@
 				{% endfor %}
 			</div>
 
-				<br>
 
 			<div class="grid-container-2">
 			{% for i in files %}
@@ -89,15 +88,12 @@
 			<br>
 
 			<div class="grid-container">
-				<br><hr>
 				{% for i in files %}
 						{% if i.format == 'sub' %}
 							<div class="file-container">
 								<a href="{% url 'base:down' i.path %}">
 								<img src="{% static 'base/pdf.png' %}" width="30" height="30">
 								{{ i.title }}</a>
-								<hr>
-								<a href="#" class="o"><img src="{{ STATIC_PREFIX }}base/icons8-menu-50.png" width="30" height="30"></a>
 							</div>
 						{% endif %}
 				{% endfor %}
@@ -141,7 +137,7 @@
 					
 						<div class="image-container">
 							<div>
-							<img src="{{ STATIC_PREFIX }}base/{{ i.title }}">
+							<img src="{{ STATIC_PREFIX }}base/ed/{{ i.title }}">
 
 							<hr>
 							<a href="{% url 'base:down' i.path %}">
