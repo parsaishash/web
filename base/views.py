@@ -11,6 +11,10 @@ from pathlib import Path
 
 
 home_dir = home = str(Path.home())
+files_dir = '{}/web/base/static/base/ser'.format(home_dir)
+
+if os.path.isdir('/media/parsa/Elements'):
+	files_dir = '/media/parsa/Elements'
 
 
 def upload(request):
@@ -113,7 +117,6 @@ def ser(directory):
 		for entry in os.scandir(directory):
 
 			if entry.is_file():
-				print(entry)
 				if entry.path[-3:] in ['mp4', 'mkv']:
 					add_file_ser(entry, 'video')
 
@@ -125,34 +128,22 @@ def ser(directory):
 				print(entry)
 				add_file_ser(entry, 'directory')
 
-
 	add_file_from_ser(directory)
-
 
 	return files, dir_path, video, sub
 
 
 
-files_dir = '{}/web/base/static/base/ser'.format(home_dir)
+
 def go_to_directory(request, path, wich_type):
-	print('this pa',path)
 	files_dir = ('/').join(path.split(' > '))
-	print(files_dir)
-	#return HttpResponse('/home/{}'.format(wich_type))
-	#return redirect(reverse('base:home', args=(type)))
-	#return home(request, wich_type)
 
 	folder_type = wich_type[0].capitalize() + wich_type[1:]
-	print(wich_type)
 
 	if wich_type == 'Serials':
-		print('heeel',files_dir)
 		files, dir_path, video, sub = ser(files_dir)
 		wich_type = video + dir_path + sub
 
-
-
-	print(wich_type,'.......')
 
 	context = {
 		'files': wich_type,
@@ -191,20 +182,20 @@ def home(request, wich_type):
 		wich_type = document
 
 	elif wich_type == 'serials':
-		print(files_dir)
-		files, dir_path, video, sub = ser('{}/web/base/static/base/ser'.format(home_dir))
+
+		if os.path.isdir('/media/parsa/Elements'):
+			files, dir_path, video, sub = ser('/media/parsa/Elements')
+		else:
+			files, dir_path, video, sub = ser('{}/web/base/static/base/ser'.format(home_dir))
+
 		wich_type =  dir_path
 
-
-
-	print(wich_type,'.......')
 
 	context = {
 		'files': wich_type,
 		'type': folder_type,
 	}
 
-	#return HttpResponse(wich_type)
 	return render(request, 'base/home.html', context)
 
 
@@ -212,6 +203,8 @@ def home(request, wich_type):
 def down(request, path):
 	print(path)
 	global data
+
+	#decode the path
 	path = ('/').join(path.split(' > '))
 	return FileResponse(open(path, 'rb'), as_attachment=True)
 

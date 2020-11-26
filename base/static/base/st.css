@@ -165,7 +165,7 @@ a.o {
 .grid-container {
   display: grid;
   justify-content: space-between;
-  grid-template-columns: 20% 20% 20% 20% 20%;
+  grid-template-columns: 25% 25% 25% 25%;
 }
 
 .grid-container-2 {
