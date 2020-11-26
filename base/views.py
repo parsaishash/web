@@ -35,7 +35,7 @@ def files_finder(directory):
 	video = []
 	document = []
 	images = []
-	
+
 
 	def add_file(entry, file_format):
 
@@ -105,7 +105,7 @@ def ser(directory):
 
 	    elif file_format == 'directory':
 	    	dir_path.append({'title': entry.name, 'path': (' > ').join(entry.path.split('/')), 'format':file_format})
-	    
+
 	    elif file_format == 'sub':
 	    	sub.append({'title': entry.name, 'path': (' > ').join(entry.path.split('/')), 'format':file_format})
 
@@ -128,7 +128,7 @@ def ser(directory):
 
 	add_file_from_ser(directory)
 
-	
+
 	return files, dir_path, video, sub
 
 
@@ -149,7 +149,7 @@ def go_to_directory(request, path, wich_type):
 		print('heeel',files_dir)
 		files, dir_path, video, sub = ser(files_dir)
 		wich_type = video + dir_path + sub
-		
+
 
 
 	print(wich_type,'.......')
@@ -167,7 +167,7 @@ def go_to_directory(request, path, wich_type):
 
 def home(request, wich_type):
 	global files_dir
-	
+
 	# add all type files from directory
 	files, musics, images, video, document = files_finder('{}/web/base/static/base/ed'.format(home_dir))
 
@@ -194,7 +194,7 @@ def home(request, wich_type):
 		print(files_dir)
 		files, dir_path, video, sub = ser('{}/web/base/static/base/ser'.format(home_dir))
 		wich_type =  dir_path
-		
+
 
 
 	print(wich_type,'.......')
