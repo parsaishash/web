@@ -3,11 +3,14 @@ from django.http import HttpResponse, HttpResponseRedirect, FileResponse
 from django.urls import reverse
 from PIL import Image
 from io import BytesIO
-from mutagen.mp3 import MP3
+from mutagen.mp3 import MP3 as mp3
+from mutagen.id3 import ID3
 import os
 from django.conf import settings
 from django.core.files.storage import FileSystemStorage
 from pathlib import Path
+import base64
+from io import StringIO
 
 
 home_dir = home = str(Path.home())
@@ -23,13 +26,13 @@ def upload(request):
 
 	return render(request, 'base/wel.html')
 
-
-
-
-
+def wel(request):
+	return render(request, 'base/wel.html')
 
 def authen(request):
 	return render(request, 'base/authen.html')
+
+
 
 
 def files_finder(directory):
@@ -43,51 +46,63 @@ def files_finder(directory):
 
 	def add_file(entry, file_format):
 
-	    files.append({'title': entry.name, 'path': entry.path, 'format':file_format})
+		files.append({'title': entry.name, 'path': entry.path, 'format':file_format})
 
-	    if file_format == 'image':
-	    	images.append({'title': entry.name, 'relpath': entry.path, 'path': (' > ').join(entry.path.split('/')), 'format':file_format})
+		if file_format == 'image':
+			images.append({'title': entry.name, 'relpath': entry.path, 'path': (' > ').join(entry.path.split('/')), 'format':file_format})
 
-	    elif file_format == 'mp3':
-	    	musics.append({'title': entry.name, 'path': (' > ').join(entry.path.split('/')), 'format':file_format})
+		elif file_format == 'mp3':
 
-	    elif file_format == 'video':
-	    	video.append({'title': entry.name, 'path': (' > ').join(entry.path.split('/')), 'format':file_format})
+			try:
 
-	    elif file_format == 'document':
-	    	document.append({'title': entry.name, 'path': (' > ').join(entry.path.split('/')), 'format':file_format})
+				s = ID3(entry.path)
+				img = Image.open(BytesIO(s.get("APIC:").data))
+
+				name = 'base/static/base/music_image/' + entry.name[:-3] + 'png'
+				img.save(name)
+
+				image_str = entry.name[:-3] + 'png'
+				musics.append({'title': entry.name, 'path': (' > ').join(entry.path.split('/')), 'format':file_format, 'image_str': image_str})
+
+			except:
+
+				musics.append({'title': entry.name, 'path': (' > ').join(entry.path.split('/')), 'format':file_format, 'image_str': 'it.png'})
+
+
+
+		elif file_format == 'video':
+			video.append({'title': entry.name, 'path': (' > ').join(entry.path.split('/')), 'format':file_format})
+
+		elif file_format == 'document':
+			document.append({'title': entry.name, 'path': (' > ').join(entry.path.split('/')), 'format':file_format})
 
 	def add_file_from(directory):
-	    for entry in os.scandir(directory):
+		for entry in os.scandir(directory):
+			if entry.is_file():
+				if entry.path[-3:] in ['mp3', 'm4a']:
+					add_file(entry, 'mp3')
 
-	        if entry.is_file():
-	        	if entry.path[-3:] in ['mp3', 'm4a']:
-	        		add_file(entry, 'mp3')
+				elif entry.path[-3:] in ['png', 'jpeg', 'JPEG', 'jpg', 'PNG']:
+					add_file(entry, 'image')
 
-	        	elif entry.path[-3:] in ['png', 'jpeg', 'JPEG', 'jpg', 'PNG']:
-	        		add_file(entry, 'image')
+				elif entry.path[-3:] in ['mp4', 'mkv']:
+					add_file(entry, 'video')
 
-	        	elif entry.path[-3:] in ['mp4', 'mkv']:
-	        		add_file(entry, 'video')
+				elif entry.path[-3:] in ['pdf', 'out', 'py', 'cpp']:
+					add_file(entry, 'document')
 
-	        	elif entry.path[-3:] in ['pdf', 'out', 'py', 'cpp']:
-	        		add_file(entry, 'document')
-
-
-	        elif entry.is_dir():
-	        	add_file_from(entry.path)
-
+				elif entry.is_dir():
+					add_file_from(entry.path)
 
 	add_file_from(directory)
 
+	files = sorted(files, key=lambda i: i['title'])
+	musics = sorted(musics, key=lambda i: i['title'])
+	images = sorted(images, key=lambda i: i['title'])
+	video = sorted(video, key=lambda i: i['title'])
+	document = sorted(document, key=lambda i: i['title'])
 
 	return files, musics, images, video, document
-
-
-
-
-def wel(request):
-	return render(request, 'base/wel.html')
 
 
 
@@ -130,6 +145,11 @@ def ser(directory):
 
 	add_file_from_ser(directory)
 
+	files = sorted(files, key=lambda i: i['title'])
+	dir_path = sorted(dir_path, key=lambda i: i['title'])
+	video = sorted(video, key=lambda i: i['title'])
+	sub = sorted(sub, key=lambda i: i['title'])
+
 	return files, dir_path, video, sub
 
 
@@ -160,7 +180,7 @@ def home(request, wich_type):
 	global files_dir
 
 	# add all type files from directory
-	files, musics, images, video, document = files_finder('{}/web/base/static/base/ed'.format('/Users/pegah2'))
+	files, musics, images, video, document = files_finder('{}/web/base/static/base/ed'.format(home_dir))
 
 	# make title start with captal leter for templates
 	folder_type = wich_type[0].capitalize() + wich_type[1:]
@@ -186,7 +206,7 @@ def home(request, wich_type):
 		if os.path.isdir('/media/parsa/Elements'):
 			files, dir_path, video, sub = ser('/media/parsa/Elements')
 		else:
-			files, dir_path, video, sub = ser('{}/web/base/static/base/ser'.format('/Users/pegah2'))
+			files, dir_path, video, sub = ser('{}/web/base/static/base/ser'.format(home_dir))
 
 		wich_type =  dir_path
 

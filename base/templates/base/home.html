@@ -110,26 +110,34 @@
 							<img src="{% static 'base/pdf.png' %}" width="30" height="30">
 							{{ i.title }}</a>
 							<hr>
-							<a href="#" class="o"><img src="{{ STATIC_PREFIX }}base/icons8-menu-50.png" width="30" height="30"></a>
 						</div>
 					{% endif %}
 			{% endfor %}
 
+			<div class="grid-container-2">
 			{% for i in files %}
 					{% if i.format == 'mp3' %}
 
 						<div class="file-container">
-							<audio controls="">
-								<source src="{{ STATIC_PREFIX }}base/{{ i.path }}" type="">
-							</audio>
-							<hr>
+							<img src="{{ STATIC_PREFIX }}base/music_image/{{ i.image_str }}" width="70" height="70">
+							<!--<audio controls="">
+								<source src="{{ STATIC_PREFIX }}base/ed/{{ i.title }}" type="">
+							</audio>-->
+							<br>
+							
 							<div class="mar-au">
 							<a href="{% url 'base:down' i.path %}">{{ i.title }}</a>
-							<a href="#" class="o"><img src="{{ STATIC_PREFIX }}base/icons8-menu-50.png" width="30" height="30"></a></div>
+							<hr>
+							<audio controls="">
+								<source src="{{ STATIC_PREFIX }}base/ed/{{ i.title }}" type="">
+							</audio>
+
+							
+							</div>
 						</div>
 					{% endif %}
 			{% endfor %}
-
+			</div>
 
 			<div class="grid-container">
 			{% for i in files %}

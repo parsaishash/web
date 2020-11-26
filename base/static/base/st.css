@@ -12,6 +12,7 @@ table, th, td {
 audio {
   border-radius: 10px;
   margin: 1px;
+  align-items: center;
 }
 
 .vertical-menu {
@@ -150,6 +151,12 @@ audio {
   padding: 10px;
   margin: 5px;
   box-shadow: 3px 3px 3px #aaaaaa;
+}
+
+.file-container img {
+  border-radius: 15%;
+  margin-right: 20px;
+  margin-top: 8px;
 }
 
 .file-container a {
