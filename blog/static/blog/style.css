@@ -1,0 +1,23 @@
+.text-container {
+	border: 2px solid green;
+	border-radius: 5px;
+	flex-wrap: wrap;
+    padding: 10px;
+    top: 60px;
+    left: 15%;
+    right: 15%;
+    position: absolute;
+}
+
+.code-container c {
+	font-family: "Lucida Console", Courier;
+	border: 2px solid #5A5A5A;
+	background-color: #D0D0D0;
+	border-radius: 5px;
+	flex-wrap: wrap;
+    padding: 10px;
+    top: 60px;
+    left: 15%;
+    right: 15%;
+    position: absolute;
+}

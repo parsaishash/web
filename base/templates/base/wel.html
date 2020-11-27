@@ -36,16 +36,16 @@
 		{% endif %}
 
 
-		{% if type == 'Video' %}
+		<!--{% if type == 'Video' %}
 			<a href="{% url 'base:home' 'video' %}" class='active'>Video</a>
 		{% else %}
 			<a href="{% url 'base:home' 'video' %}">Video</a>
-		{% endif %}
+		{% endif %}-->
 
 		{% if type == 'Serials' %}
-			<a href="{% url 'base:home' 'serials' %}" class='active'>Serials</a>
+			<a href="{% url 'base:home' 'serials' %}" class='active'>Movies</a>
 		{% else %}
-			<a href="{% url 'base:home' 'serials' %}">Serials</a>
+			<a href="{% url 'base:home' 'serials' %}">Movies</a>
 		{% endif %}
 
 	</div>

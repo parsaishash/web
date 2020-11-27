@@ -4,6 +4,6 @@ from django.urls import reverse
 
 
 def home(request):
-	return HttpResponse('hello to my blog')
+	return render(request, 'blog/home.html')
 
 # Create your views here.

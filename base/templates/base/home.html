@@ -38,16 +38,16 @@
 		{% endif %}
 
 
-		{% if type == 'Video' %}
+		<!--{% if type == 'Video' %}
 			<a href="{% url 'base:home' 'video' %}" class='active'>Video</a>
 		{% else %}
 			<a href="{% url 'base:home' 'video' %}">Video</a>
-		{% endif %}
+		{% endif %}-->
 
 		{% if type == 'Serials' %}
-			<a href="{% url 'base:home' 'serials' %}" class='active'>Serials</a>
+			<a href="{% url 'base:home' 'serials' %}" class='active'>Movies</a>
 		{% else %}
-			<a href="{% url 'base:home' 'serials' %}">Serials</a>
+			<a href="{% url 'base:home' 'serials' %}">Movies</a>
 		{% endif %}
 
 	</div> 
@@ -104,23 +104,23 @@
 
 
 			
-
-			{% for i in files %}
-					{% if i.format == 'document' %}
-						<div class="file-container">
-							<a href="{% url 'base:down' i.path %}">
-							<img src="{% static 'base/pdf.png' %}" width="30" height="30">
-							{{ i.title }}</a>
-							<hr>
-						</div>
-					{% endif %}
-			{% endfor %}
-
+			<div class="grid-container-2">
+				{% for i in files %}
+						{% if i.format == 'document' %}
+							<div class="file-container">
+								<a href="{% url 'base:down' i.path %}">
+								<img src="{% static 'base/pdf.png' %}" width="30" height="30">
+								{{ i.title }}</a>
+								<hr>
+							</div>
+						{% endif %}
+				{% endfor %}
+			</div>
 			<div class="grid-container-2">
 			{% for i in files %}
 					{% if i.format == 'mp3' %}
 
-						<div class="file-container">
+						<div class="file-container music-image">
 							<img src="{{ STATIC_PREFIX }}base/music_image/{{ i.image_str }}" width="70" height="70">
 							<!--<audio controls="">
 								<source src="{{ STATIC_PREFIX }}base/ed/{{ i.title }}" type="">
