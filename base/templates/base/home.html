@@ -63,9 +63,11 @@
 						{% if i.format == 'directory' %}
 
 							<div class="file-container">
+								<div>
 								<img src="{{ STATIC_PREFIX }}base/folder.png" width="30" height="30">
 								<a href="{% url 'base:go_to_directory' i.path type %}">{{ i.title }}
 								</a>
+							</div>
 							</div>
 						{% endif %}
 				{% endfor %}

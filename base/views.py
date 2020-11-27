@@ -14,6 +14,7 @@ from io import StringIO
 
 
 home_dir = home = str(Path.home())
+home_dir = '/home/parsa'
 files_dir = '{}/web/base/static/base/ser'.format(home_dir)
 
 if os.path.isdir('/media/parsa/Elements'):
@@ -58,7 +59,8 @@ def files_finder(directory):
 				s = ID3(entry.path)
 				img = Image.open(BytesIO(s.get("APIC:").data))
 
-				name = 'base/static/base/music_image/' + entry.name[:-3] + 'png'
+				name = '/home/parsa/web/base/static/base/music_image/' + entry.name[:-3] + 'png'
+				img.thumbnail((70, 70))
 				img.save(name)
 
 				image_str = entry.name[:-3] + 'png'
