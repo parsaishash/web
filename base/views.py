@@ -1,24 +1,36 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseRedirect, FileResponse
 from django.urls import reverse
+from django.conf import settings
+from django.core.files.storage import FileSystemStorage
+from django.contrib import messages
+
+
 from PIL import Image
 from io import BytesIO
 from mutagen.mp3 import MP3 as mp3
 from mutagen.id3 import ID3
 import os
-from django.conf import settings
-from django.core.files.storage import FileSystemStorage
 from pathlib import Path
 import base64
 from io import StringIO
 
 
-home_dir = home = str(Path.home())
-#home_dir = '/home/parsa'
+users = [
+	{'username': 'parsa', 'password': '301054'},
+	{'username': 'danialbehzadi', 'password': 'danialbehzadi'},
+	{'username': 'amirali', 'password': '1382'},
+	{'username': 'main', 'password': 'main1234'},
+]
+
+
+
+#home_dir = home = str(Path.home())
+home_dir = '/home/parsa'
 files_dir = '{}/web/base/static/base/ser'.format(home_dir)
 
-if os.path.isdir('/media/parsa/Elements'):
-	files_dir = '/media/parsa/Elements'
+#if os.path.isdir('/media/parsa/Elements'):
+#	files_dir = '/media/parsa/Elements'
 
 
 def upload(request):
@@ -28,12 +40,22 @@ def upload(request):
 	return render(request, 'base/wel.html')
 
 def wel(request):
-	return render(request, 'base/wel.html')
+	if request.method == 'POST':
+		username = request.POST['username']
+		password = request.POST['password']
+
+		if {'username': username, 'password': password} in users:
+			messages.add_message(request, messages.INFO, 'login successful')
+			return render(request, 'base/wel.html')
+
+		else:
+			return redirect('base:authen')
+	else:
+		return render(request, 'base/wel.html')
+
 
 def authen(request):
 	return render(request, 'base/authen.html')
-
-
 
 
 def files_finder(directory):
@@ -59,7 +81,7 @@ def files_finder(directory):
 				s = ID3(entry.path)
 				img = Image.open(BytesIO(s.get("APIC:").data))
 
-				name = '/Users/pegah2/web/base/static/base/music_image/' + entry.name[:-3] + 'png'
+				name = '/home/parsa/web/base/static/base/music_image/' + entry.name[:-3] + 'png'
 				img.thumbnail((70, 70))
 				img.save(name)
 
@@ -108,7 +130,7 @@ def files_finder(directory):
 
 
 
-
+# ser is for adding files for paths and movies
 def ser(directory):
 
 	video = []
@@ -121,14 +143,18 @@ def ser(directory):
 
 	    files.append({'title': entry.name, 'relpath': entry.path, 'path': entry.path, 'format':file_format})
 
+	    # adding movies
 	    if file_format == 'video':
 	    	video.append({'title': entry.name, 'relpath': entry.path, 'path': (' > ').join(entry.path.split('/')), 'format':file_format})
 
+	    # adding directory path's links
 	    elif file_format == 'directory':
 	    	dir_path.append({'title': entry.name, 'path': (' > ').join(entry.path.split('/')), 'format':file_format})
 
+	    # adding subtitles
 	    elif file_format == 'sub':
 	    	sub.append({'title': entry.name, 'path': (' > ').join(entry.path.split('/')), 'format':file_format})
+
 
 	def add_file_from_ser(directory):
 		for entry in os.scandir(directory):
@@ -147,6 +173,8 @@ def ser(directory):
 
 	add_file_from_ser(directory)
 
+
+	# sorting all files for better view
 	files = sorted(files, key=lambda i: i['title'])
 	dir_path = sorted(dir_path, key=lambda i: i['title'])
 	video = sorted(video, key=lambda i: i['title'])
@@ -156,23 +184,23 @@ def ser(directory):
 
 
 
-
+# this func is for going in to the paths and serv the files on that directory with ser func
 def go_to_directory(request, path, wich_type):
+
 	files_dir = ('/').join(path.split(' > '))
 
+	# folder type for viewin title in front & filtering data
 	folder_type = wich_type[0].capitalize() + wich_type[1:]
 
 	if wich_type == 'Serials':
 		files, dir_path, video, sub = ser(files_dir)
 		wich_type = video + dir_path + sub
 
-
 	context = {
 		'files': wich_type,
 		'type': folder_type,
 	}
 
-	#return HttpResponse(wich_type)
 	return render(request, 'base/home.html', context)
 
 
@@ -204,12 +232,7 @@ def home(request, wich_type):
 		wich_type = document
 
 	elif wich_type == 'serials':
-
-		if os.path.isdir('/media/parsa/Elements'):
-			files, dir_path, video, sub = ser('/media/parsa/Elements')
-		else:
-			files, dir_path, video, sub = ser('{}/web/base/static/base/ser'.format(home_dir))
-
+		files, dir_path, video, sub = ser('{}/web/base/static/base/ser'.format(home_dir))
 		wich_type =  dir_path + video
 
 
@@ -221,7 +244,7 @@ def home(request, wich_type):
 	return render(request, 'base/home.html', context)
 
 
-
+# this func response files for download
 def down(request, path):
 	print(path)
 	global data

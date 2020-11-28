@@ -51,6 +51,12 @@
 	</div>
 
 	<div class="chat-container-2">
+		{% if messages %}
+			{% for message in messages %}
+				<div class="alert alert-success">{{ message }}</div>
+			{% endfor %}
+		{% endif %}
+
 		<h2>Home</h2>
 		<hr>
 		
@@ -62,6 +68,8 @@
 			<input type="file" name="myfile" id="myfile" />
 			<button type="submit" class="btn btn-success" value="Upload">Upload</button>
 		</form>
+
+
 
 	</div>
 </body>
