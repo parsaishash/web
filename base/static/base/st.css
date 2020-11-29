@@ -8,7 +8,33 @@ table, th, td {
 }
 
 
+
 @media only screen and (min-width: 1100px) {
+
+	.file-container {
+	  border-radius: 10px;
+	  background-color: rgb(230, 230, 230);
+	  position: relative;
+	  display: flex;
+	  padding: 10px;
+	  margin: 5px;
+	  box-shadow: 3px 3px 3px #aaaaaa;
+	}
+
+	.file-container a {
+	  word-wrap: 20px;
+	}
+
+	.file-container:hover {
+	  background-color: rgb(230, 236, 248);
+	}
+
+	.file-container:hover .o {
+	  visibility: visible;
+	  transition: 2s;
+	}
+
+
 	.grid-container {
 		display: grid;
 		justify-content: space-between;
@@ -84,6 +110,34 @@ table, th, td {
 
 
 @media only screen and (max-width: 1100px) {
+	body {
+		width: 500%;
+		height: 500%;
+	}
+	.file-container {
+	  border-radius: 10px;
+	  background-color: rgb(230, 230, 230);
+	  position: relative;
+	  display: flex;
+	  padding: 10px;
+	  margin: 5px;
+	  box-shadow: 3px 3px 3px #aaaaaa;
+	}
+
+	.file-container a {
+	  word-wrap: 20px;
+	}
+
+	.file-container:hover {
+	  background-color: rgb(230, 236, 248);
+	}
+
+	.file-container:hover .o {
+	  visibility: visible;
+	  transition: 2s;
+	}
+
+
 	.grid-container {
 		display: grid;
 		justify-content: space-between;
@@ -106,8 +160,8 @@ table, th, td {
     	flex-wrap: wrap;
     	padding: 10px;
     	top: 60px;
-    	left: 10%;
-    	right: 10%;
+    	left: 1%;
+    	right: 1%;
     	position: absolute;
 	}
 
@@ -333,34 +387,7 @@ table, th, td {
 
 
 
-.file-container {
-  border-radius: 10px;
-  background-color: rgb(230, 230, 230);
-  position: relative;
-  display: flex;
-  padding: 10px;
-  margin: 5px;
-  box-shadow: 3px 3px 3px #aaaaaa;
-}
 
-.music-image img {
-  border-radius: 15%;
-  margin-right: 20px;
-  margin-top: 5px;
-}
-
-.file-container a {
-  word-wrap: 20px;
-}
-
-.file-container:hover {
-  background-color: rgb(230, 236, 248);
-}
-
-.file-container:hover .o {
-  visibility: visible;
-  transition: 2s;
-}
 
 .image-container:hover {
   background-color: rgb(230, 236, 248);
@@ -368,7 +395,11 @@ table, th, td {
 }
 
 
-
+.music-image img {
+  border-radius: 15%;
+  margin-right: 20px;
+  margin-top: 5px;
+}
 
 
 /*
@@ -400,6 +431,11 @@ a {
   position: absolute;
 }
 
+
+.crop {
+	overflow:hidden;
+}​
+
 div.scrollmenu {
 	background-color: #333;
 	overflow: auto;
@@ -413,3 +449,41 @@ div.scrollmenu td {
   padding: 14px;
   text-decoration: none;
 }
+
+
+
+
+
+.dropdown {
+  float: left;
+  overflow: hidden;
+}
+
+.dropdown .dropbtn {
+  cursor: pointer;
+  font-size: 16px;  
+  border: none;
+  outline: none;
+  color: white;
+  padding: 14px 16px;
+  background-color: inherit;
+  font-family: inherit;
+  margin: 0;
+}
+
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+
+
+.dropdown-content a:hover {
+  background-color: #ddd;
+}
+

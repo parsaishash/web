@@ -25,12 +25,12 @@ users = [
 
 
 
-#home_dir = home = str(Path.home())
-home_dir = '/home/parsa'
+home_dir = home = str(Path.home())
+#home_dir = '/home/parsa'
 files_dir = '{}/web/base/static/base/ser'.format(home_dir)
 
-#if os.path.isdir('/media/parsa/Elements'):
-#	files_dir = '/media/parsa/Elements'
+if os.path.isdir('/media/parsa/Elements'):
+	files_dir = '/media/parsa/Elements'
 
 
 def upload(request):
@@ -78,12 +78,23 @@ def files_finder(directory):
 
 			try:
 
-				s = ID3(entry.path)
-				img = Image.open(BytesIO(s.get("APIC:").data))
+				try:
+					s = ID3(entry.path)
+					img = Image.open(BytesIO(s.get("APIC:").data))
 
-				name = '/home/parsa/web/base/static/base/music_image/' + entry.name[:-3] + 'png'
-				img.thumbnail((70, 70))
-				img.save(name)
+					name = '/Users/pegah2/web/base/static/base/music_image/' + entry.name[:-3] + 'png'
+					img.thumbnail((70, 70))
+					img.save(name)
+					
+				except:
+					s = ID3(entry.path)
+					img = Image.open(BytesIO(s.get("APIC:Album cover").data))
+
+					name = '/Users/pegah2/web/base/static/base/music_image/' + entry.name[:-3] + 'png'
+					img.thumbnail((70, 70))
+					img.save(name)
+
+				
 
 				image_str = entry.name[:-3] + 'png'
 				musics.append({'title': entry.name, 'path': (' > ').join(entry.path.split('/')), 'format':file_format, 'image_str': image_str})

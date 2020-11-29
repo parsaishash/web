@@ -9,14 +9,14 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="{% static 'base/st.css' %}">
 </head>
+
 <body>
 
 	<div class="vertical-menu">
+
+		
 		
 		<a href="{% url 'base:wel' %}">Home</a>
-		
-
-
 		{% if type == 'Musics' %}
 			<a href="{% url 'base:home' 'musics' %}" class='active'>Music</a>
 		{% else %}
@@ -77,7 +77,7 @@
 			<div class="grid-container-2">
 			{% for i in files %}
 					{% if i.format == 'video' %}
-						<div class="file-container">
+						<div class="file-container crop">
 							<a href="{% url 'base:down' i.path %}">
 							<img src="{% static 'base/video.png' %}" width="30" height="30">
 							{{ i.title }}</a>
@@ -169,6 +169,8 @@
 			</div>
 		{% endif %}
 	</div>
+
+
 
 
 	<script src="{% static 'base/test.js' %}">
