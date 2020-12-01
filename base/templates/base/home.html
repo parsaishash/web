@@ -9,14 +9,14 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="{% static 'base/st.css' %}">
 </head>
+
 <body>
 
 	<div class="vertical-menu">
+
+		
 		
 		<a href="{% url 'base:wel' %}">Home</a>
-		
-
-
 		{% if type == 'Musics' %}
 			<a href="{% url 'base:home' 'musics' %}" class='active'>Music</a>
 		{% else %}
@@ -78,10 +78,9 @@
 			{% for i in files %}
 					{% if i.format == 'video' %}
 						<div class="file-container crop">
-							<div>
 							<a href="{% url 'base:down' i.path %}">
 							<img src="{% static 'base/video.png' %}" width="30" height="30">
-							{{ i.title }}</a></div>
+							{{ i.title }}</a>
 							<hr>
 							
 						</div>
@@ -93,7 +92,7 @@
 			<div class="grid-container">
 				{% for i in files %}
 						{% if i.format == 'sub' %}
-							<div class="file-container crop">
+							<div class="file-container">
 								<a href="{% url 'base:down' i.path %}">
 								<img src="{% static 'base/pdf.png' %}" width="30" height="30">
 								{{ i.title }}</a>
@@ -108,7 +107,7 @@
 			<div class="grid-container-2">
 				{% for i in files %}
 						{% if i.format == 'document' %}
-							<div class="file-container crop">
+							<div class="file-container">
 								<a href="{% url 'base:down' i.path %}">
 								<img src="{% static 'base/pdf.png' %}" width="30" height="30">
 								{{ i.title }}</a>
@@ -121,20 +120,19 @@
 			{% for i in files %}
 					{% if i.format == 'mp3' %}
 
-						<div class="file-container crop">
-							<div>
-								<img class="music-image" src="{{ STATIC_PREFIX }}base/music_image/{{ i.image_str }}">
-								<div class="middle">{{ i.data.album }}<br>{{ i.data.date }}</div>
-							</div>
-							
+						<div class="file-container music-image">
+							<img src="{{ STATIC_PREFIX }}base/music_image/{{ i.image_str }}" width="70" height="70">
+							<!--<audio controls="">
+								<source src="{{ STATIC_PREFIX }}base/ed/{{ i.title }}" type="">
+							</audio>-->
+							<br>
 							
 							<div class="mar-au">
-							<a href="{% url 'base:down' i.path %}">{{ i.name }}</a>
+							<a href="{% url 'base:down' i.path %}">{{ i.title }}</a>
 							<hr>
-							<audio controls="play">
-								<source src="{{ STATIC_PREFIX }}base/ed/{{ i.fullname }}" type="">
+							<audio controls="">
+								<source src="{{ STATIC_PREFIX }}base/ed/{{ i.title }}" type="">
 							</audio>
-							
 
 							
 							</div>
@@ -173,5 +171,9 @@
 	</div>
 
 
+
+
+	<script src="{% static 'base/test.js' %}">
+	</script>
 </body>
 </html>

@@ -4,11 +4,12 @@ from django.urls import reverse
 from django.conf import settings
 from django.core.files.storage import FileSystemStorage
 from django.contrib import messages
+
+
 from PIL import Image
 from io import BytesIO
-from mutagen.mp3 import MP3
+from mutagen.mp3 import MP3 as mp3
 from mutagen.id3 import ID3
-from mutagen.easyid3 import EasyID3
 import os
 from pathlib import Path
 import base64
@@ -24,16 +25,15 @@ users = [
 
 
 
-#home_dir = home = str(Path.home())
-home_dir = '/home/parsa'
+home_dir = home = str(Path.home())
+#home_dir = '/home/parsa'
 files_dir = '{}/web/base/static/base/ser'.format(home_dir)
 
-#if os.path.isdir('/media/parsa/Elements'):
-#	files_dir = '/media/parsa/Elements'
+if os.path.isdir('/media/parsa/Elements'):
+	files_dir = '/media/parsa/Elements'
 
 
 def upload(request):
-	print(request.POST)
 	fs = FileSystemStorage()
 	filename = fs.save(request.FILES['myfile'].name, request.FILES['myfile'])
 
@@ -66,6 +66,7 @@ def files_finder(directory):
 	document = []
 	images = []
 
+
 	def add_file(entry, file_format):
 
 		files.append({'title': entry.name, 'path': entry.path, 'format':file_format})
@@ -76,32 +77,31 @@ def files_finder(directory):
 		elif file_format == 'mp3':
 
 			try:
-				s = ID3(entry.path)
-				for i in s:
-					if i.startswith("APIC:"):
-						img = Image.open(BytesIO(s.get(i).data))
 
-				name = '/home/parsa/web/base/static/base/music_image/' + entry.name[:-3] + 'png'
-				img.thumbnail((100, 100))
-				img.save(name)
-				
 				try:
-					data = EasyID3(entry.path)
-					name = data['title'][0]
+					s = ID3(entry.path)
+					img = Image.open(BytesIO(s.get("APIC:").data))
+
+					name = '/Users/pegah2/web/base/static/base/music_image/' + entry.name[:-3] + 'png'
+					img.thumbnail((70, 70))
+					img.save(name)
+					
 				except:
-					name = entry.name
+					s = ID3(entry.path)
+					img = Image.open(BytesIO(s.get("APIC:Album cover").data))
+
+					name = '/Users/pegah2/web/base/static/base/music_image/' + entry.name[:-3] + 'png'
+					img.thumbnail((70, 70))
+					img.save(name)
+
+				
 
 				image_str = entry.name[:-3] + 'png'
-				musics.append({'data': data, 'name': name, 'fullname': entry.name, 'path': (' > ').join(entry.path.split('/')), 'format':file_format, 'image_str': image_str})
+				musics.append({'title': entry.name, 'path': (' > ').join(entry.path.split('/')), 'format':file_format, 'image_str': image_str})
 
 			except:
-				try:
-					data = EasyID3(entry.path)
-					name = data['title'][0]
-				except:
-					name = entry.name
 
-				musics.append({'data': data, 'name': name, 'fullname': entry.name, 'path': (' > ').join(entry.path.split('/')), 'format':file_format, 'image_str': 'it.png'})
+				musics.append({'title': entry.name, 'path': (' > ').join(entry.path.split('/')), 'format':file_format, 'image_str': 'it.png'})
 
 
 
@@ -132,7 +132,7 @@ def files_finder(directory):
 	add_file_from(directory)
 
 	files = sorted(files, key=lambda i: i['title'])
-	musics = sorted(musics, key=lambda i: i['fullname'])
+	musics = sorted(musics, key=lambda i: i['title'])
 	images = sorted(images, key=lambda i: i['title'])
 	video = sorted(video, key=lambda i: i['title'])
 	document = sorted(document, key=lambda i: i['title'])
@@ -156,7 +156,7 @@ def ser(directory):
 
 	    # adding movies
 	    if file_format == 'video':
-	    	video.append({'title': entry.name, 'relpath': entry.path, 'path': (' > ').join(entry.path.split('/')), 'format':file_format, 'size': str(round(entry.stat().st_size/1000000, 1)) + 'Mb'})
+	    	video.append({'title': entry.name, 'relpath': entry.path, 'path': (' > ').join(entry.path.split('/')), 'format':file_format})
 
 	    # adding directory path's links
 	    elif file_format == 'directory':
