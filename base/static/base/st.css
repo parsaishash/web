@@ -217,145 +217,6 @@ table, th, td {
 
 
 
-/*
-@media only screen and (min-width: 500px) {
-	.grid-container {
-		display: grid;
-		justify-content: space-between;
-		grid-template-columns: 50% 50%;
-	}
-		
-	.grid-container-2 {
-		display: grid;
-		justify-content: space-between;
-		grid-template-columns: 100%;
-	}
-
-	audio {
-		border-radius: 10px;
-		margin: 1px;
-		align-items: center;
-	}
-}
-
-@media only screen and (max-width: 500px) {
-	.grid-container {
-    		display: grid;
-    		justify-content: space-between;
-    		grid-template-columns: 50% 50%;
-  	}
-    
-  	.grid-container-2 {
-    		display: grid;
-    		justify-content: space-between;
-    		grid-template-columns: 100%;
-  	}
-	
-	audio {
-		border-radius: 10px;
-		margin: 1px;
-		align-items: center;
-		width: 100%;
-	}
-
-	.vertical-menu {
-		position: fixed;
-		right: 5px;
-		left: 5px;
-		top: 20px;
-		padding: 7px;
-		border-radius: 10px;
-		background-color: rgb(80, 90, 90);
-		overflow: hidden;
-		transition: top 0.3s;
-		z-index: 1;
-		transition: top 0.3s;
-	}
-	.vertical-menu a {
-		float: right;
-		color: #f2f2f2;
-		text-align: center;
-		padding: 10px 30px;
-		text-decoration: none;
-		font-size: 15px;
-		border-radius: 6px;
-	}
-
-
-
-	.vertical-menu a:hover {
-		background-color: #ddd;
-		transition: .5s;
-		color: black;
-	}
-
-	  
-
-	.vertical-menu a.active {
-		float: right;
-		color: white;
-		text-align: center;
-		padding: 10px 30px;
-		text-decoration: none;
-		font-size: 15px;
-		border-radius: 6px;
-		background-color: #4CAF50;
-		color: white;
-	}
-}
-*/
-
-
-
-
-
-
-/*______________________________top menu___________________________*/
-/*
-.vertical-menu {
-    position: fixed;
-    right: 5px;
-    left: 5px;
-    top: 0;
-    padding: 7px;
-    border-radius: 10px;
-    background-color: rgb(80, 90, 90);
-    overflow: hidden;
-    transition: top 0.3s;
-    z-index: 1;
-    transition: top 0.3s;
-}
-  
-.vertical-menu a {
-    float: right;
-    color: #f2f2f2;
-    text-align: center;
-    padding: 10px 30px;
-    text-decoration: none;
-    font-size: 15px;
-    border-radius: 6px;
-}
-
-.vertical-menu a:hover {
-    background-color: #ddd;
-    transition: .5s;
-    color: black;
-}
-
-.vertical-menu a.active {
-    float: right;
-    color: white;
-    text-align: center;
-    padding: 10px 30px;
-    text-decoration: none;
-    font-size: 15px;
-    border-radius: 6px;
-    background-color: #4CAF50;
-    color: white;
-}
-*/
-
-
 
 
 
@@ -395,25 +256,14 @@ table, th, td {
 }
 
 
-.music-image img {
-  border-radius: 15%;
+.music-image {
+  border-radius: 8px;
   margin-right: 20px;
-  margin-top: 5px;
+  width: 100px;
+  height: 100px;
 }
 
 
-/*
-
-
-.chat-container-2 {
-    flex-wrap: wrap;
-    padding: 10px;
-    top: 60px;
-    left: 200px;
-    right: 10%;
-    position: absolute;
-}
-*/
 .mid {
  	left: 40px;
 	top: 40px;

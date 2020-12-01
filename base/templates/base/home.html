@@ -38,12 +38,6 @@
 		{% endif %}
 
 
-		<!--{% if type == 'Video' %}
-			<a href="{% url 'base:home' 'video' %}" class='active'>Video</a>
-		{% else %}
-			<a href="{% url 'base:home' 'video' %}">Video</a>
-		{% endif %}-->
-
 		{% if type == 'Serials' %}
 			<a href="{% url 'base:home' 'serials' %}" class='active'>Movies</a>
 		{% else %}
@@ -62,7 +56,7 @@
 				{% for i in files %}
 						{% if i.format == 'directory' %}
 
-							<div class="file-container">
+							<div class="file-container crop">
 								<div>
 								<img src="{{ STATIC_PREFIX }}base/folder.png" width="30" height="30">
 								<a href="{% url 'base:go_to_directory' i.path type %}">{{ i.title }}
@@ -92,7 +86,7 @@
 			<div class="grid-container">
 				{% for i in files %}
 						{% if i.format == 'sub' %}
-							<div class="file-container">
+							<div class="file-container crop">
 								<a href="{% url 'base:down' i.path %}">
 								<img src="{% static 'base/pdf.png' %}" width="30" height="30">
 								{{ i.title }}</a>
@@ -107,7 +101,7 @@
 			<div class="grid-container-2">
 				{% for i in files %}
 						{% if i.format == 'document' %}
-							<div class="file-container">
+							<div class="file-container crop">
 								<a href="{% url 'base:down' i.path %}">
 								<img src="{% static 'base/pdf.png' %}" width="30" height="30">
 								{{ i.title }}</a>
@@ -120,15 +114,13 @@
 			{% for i in files %}
 					{% if i.format == 'mp3' %}
 
-						<div class="file-container music-image">
-							<img src="{{ STATIC_PREFIX }}base/music_image/{{ i.image_str }}" width="70" height="70">
-							<!--<audio controls="">
-								<source src="{{ STATIC_PREFIX }}base/ed/{{ i.title }}" type="">
-							</audio>-->
+						<div class="file-container crop">
+							<img class="music-image" src="{{ STATIC_PREFIX }}base/music_image/{{ i.image_str }}">
+							
 							<br>
 							
 							<div class="mar-au">
-							<a href="{% url 'base:down' i.path %}">{{ i.title }}</a>
+							<a href="{% url 'base:down' i.path %}">{{ i.name }}</a>
 							<hr>
 							<audio controls="">
 								<source src="{{ STATIC_PREFIX }}base/ed/{{ i.title }}" type="">
@@ -145,7 +137,7 @@
 			{% for i in files %}
 					{% if i.format == 'image' %}
 					
-						<div class="image-container">
+						<div class="image-container crop">
 							<div>
 							<img src="{{ STATIC_PREFIX }}base/ed/{{ i.title }}">
 

@@ -10,6 +10,8 @@ from PIL import Image
 from io import BytesIO
 from mutagen.mp3 import MP3 as mp3
 from mutagen.id3 import ID3
+from mutagen.easyid3 import EasyID3
+
 import os
 from pathlib import Path
 import base64
@@ -26,11 +28,11 @@ users = [
 
 
 home_dir = home = str(Path.home())
-#home_dir = '/home/parsa'
+home_dir = '/home/parsa'
 files_dir = '{}/web/base/static/base/ser'.format(home_dir)
 
-if os.path.isdir('/media/parsa/Elements'):
-	files_dir = '/media/parsa/Elements'
+#if os.path.isdir('/media/parsa/Elements'):
+#	files_dir = '/media/parsa/Elements'
 
 
 def upload(request):
@@ -78,30 +80,37 @@ def files_finder(directory):
 
 			try:
 
+				s = ID3(entry.path)
+				for i in s:
+					if i.startswith("APIC:"):
+						img = Image.open(BytesIO(s.get(i).data))
+
+				name = '/home/parsa/web/base/static/base/music_image/' + entry.name[:-3] + 'png'
+				img.thumbnail((100, 100))
+				img.save(name)
+
+
 				try:
-					s = ID3(entry.path)
-					img = Image.open(BytesIO(s.get("APIC:").data))
-
-					name = '/Users/pegah2/web/base/static/base/music_image/' + entry.name[:-3] + 'png'
-					img.thumbnail((70, 70))
-					img.save(name)
-					
+					data = EasyID3(entry.path)
+					name = data['title'][0]
 				except:
-					s = ID3(entry.path)
-					img = Image.open(BytesIO(s.get("APIC:Album cover").data))
-
-					name = '/Users/pegah2/web/base/static/base/music_image/' + entry.name[:-3] + 'png'
-					img.thumbnail((70, 70))
-					img.save(name)
-
-				
+					name = entry.name[:-4][0]
+					
 
 				image_str = entry.name[:-3] + 'png'
-				musics.append({'title': entry.name, 'path': (' > ').join(entry.path.split('/')), 'format':file_format, 'image_str': image_str})
+				musics.append({'name': name, 'title': entry.name, 'path': (' > ').join(entry.path.split('/')), 'format':file_format, 'image_str': image_str})
+
+
 
 			except:
 
-				musics.append({'title': entry.name, 'path': (' > ').join(entry.path.split('/')), 'format':file_format, 'image_str': 'it.png'})
+				try:
+					data = EasyID3(entry.path)
+					name = data['title'][0]
+				except:
+					name = entry.name[:-4][0]
+
+				musics.append({'name': name, 'title': entry.name, 'path': (' > ').join(entry.path.split('/')), 'format':file_format, 'image_str': 'it.png'})
 
 
 
