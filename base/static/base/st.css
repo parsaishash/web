@@ -259,8 +259,8 @@ table, th, td {
 .music-image {
   border-radius: 8px;
   margin-right: 20px;
-  width: 100px;
-  height: 100px;
+  width: 125px;
+  height: 125px;
 }
 
 
@@ -271,6 +271,11 @@ table, th, td {
 }
 
 a {
+  color: black;
+  margin-left: 10px;
+}
+
+i {
   color: black;
   margin-left: 10px;
 }

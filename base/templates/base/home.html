@@ -120,7 +120,9 @@
 							<br>
 							
 							<div class="mar-au">
-							<a href="{% url 'base:down' i.path %}">{{ i.name }}</a>
+							<a href="{% url 'base:down' i.path %}">{{ i.name }} -- <i>{{ i.date }}</i></a>
+							<br>
+							<i>{{ i.artist }} -- ({{ i.genre }})</i>
 							<hr>
 							<audio controls="">
 								<source src="{{ STATIC_PREFIX }}base/ed/{{ i.title }}" type="">

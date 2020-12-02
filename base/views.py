@@ -84,21 +84,27 @@ def files_finder(directory):
 				for i in s:
 					if i.startswith("APIC:"):
 						img = Image.open(BytesIO(s.get(i).data))
+						break
 
 				name = '/home/parsa/web/base/static/base/music_image/' + entry.name[:-3] + 'png'
-				img.thumbnail((100, 100))
+				img.thumbnail((125, 125))
 				img.save(name)
 
 
 				try:
 					data = EasyID3(entry.path)
 					name = data['title'][0]
+					date = data['date'][0]
+					artist = data['artist'][0]
+					genre = data['genre'][0]
 				except:
-					name = entry.name[:-4][0]
-					
+					name = entry.name[:-4]
+					date =''
+					artist = ''
+					genre = ''
 
 				image_str = entry.name[:-3] + 'png'
-				musics.append({'name': name, 'title': entry.name, 'path': (' > ').join(entry.path.split('/')), 'format':file_format, 'image_str': image_str})
+				musics.append({'name': name, 'title': entry.name, 'genre': genre, 'artist': artist, 'date': date, 'path': (' > ').join(entry.path.split('/')), 'format':file_format, 'image_str': image_str})
 
 
 
@@ -141,7 +147,7 @@ def files_finder(directory):
 	add_file_from(directory)
 
 	files = sorted(files, key=lambda i: i['title'])
-	musics = sorted(musics, key=lambda i: i['title'])
+	musics = sorted(musics, key=lambda i: i['name'])
 	images = sorted(images, key=lambda i: i['title'])
 	video = sorted(video, key=lambda i: i['title'])
 	document = sorted(document, key=lambda i: i['title'])
