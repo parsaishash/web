@@ -260,7 +260,7 @@ table, th, td {
   border-radius: 8px;
   margin-right: 20px;
   width: 125px;
-  height: 125px;
+  height: auto;
 }
 
 
