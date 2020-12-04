@@ -281,11 +281,18 @@ i {
 }
 
 .log {
-  left: 20%;
-  top: 30px;
-  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 2px solid green;
+  padding: 20px;
+  border-radius: 10px;
 }
 
+.filed {
+	border-radius: 10px;
+	border: 2px solid black;
+}
 
 .crop {
 	overflow:hidden;
