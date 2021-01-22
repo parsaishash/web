@@ -19,7 +19,7 @@ from io import StringIO
 
 
 users = [
-	{'username': 'parsa', 'password': '301054'},
+	{'username': 'parsa', 'password': '1382'},
 	{'username': 'danialbehzadi', 'password': 'danialbehzadi'},
 	{'username': 'amirali', 'password': '1382'},
 	{'username': 'main', 'password': 'main1234'},
