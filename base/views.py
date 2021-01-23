@@ -28,7 +28,6 @@ users = [
 
 
 home_dir = home = str(Path.home())
-home_dir = '/home/parsa'
 files_dir = '{}/web/base/static/base/ser'.format(home_dir)
 
 #if os.path.isdir('/media/parsa/Elements'):
