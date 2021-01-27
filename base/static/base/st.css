@@ -343,7 +343,10 @@ i {
   align-items: center;
   border: 2px solid green;
   padding: 20px;
+<<<<<<< HEAD
   top: 50px;
+=======
+>>>>>>> a8e19f68e1f80dab6a4a325d391f923b4cec7549
   border-radius: 10px;
 }
 
