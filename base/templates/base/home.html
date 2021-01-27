@@ -72,9 +72,20 @@
 			{% for i in files %}
 					{% if i.format == 'video' %}
 						<div class="file-container crop">
-							<a href="{% url 'base:down' i.path %}">
-							<img src="{% static 'base/video.png' %}" width="30" height="30">
-							{{ i.title }}</a>
+							{% if i.review %}
+								
+								<a href="{% url 'base:down' i.path %}">
+								<img src="{% static 'base/video.png' %}" width="30" height="30">
+								{{ i.title }}</a>
+								<hr>
+								
+							{% else %}
+								<a href="{% url 'base:down' i.path %}">
+								<img src="{% static 'base/video.png' %}" width="30" height="30">
+								{{ i.title }}</a>
+							{% endif %}
+							
+							
 							<hr>
 							
 						</div>
@@ -166,8 +177,6 @@
 
 
 
-
-	<script src="{% static 'base/test.js' %}">
-	</script>
+	<script src="https://vjs.zencdn.net/7.10.2/video.js"></script>
 </body>
 </html>

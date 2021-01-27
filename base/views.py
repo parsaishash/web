@@ -19,7 +19,7 @@ from io import StringIO
 
 
 users = [
-	{'username': 'parsa', 'password': '301054'},
+	{'username': 'parsa', 'password': '1382'},
 	{'username': 'danialbehzadi', 'password': 'danialbehzadi'},
 	{'username': 'amirali', 'password': '1382'},
 	{'username': 'main', 'password': 'main1234'},
@@ -34,6 +34,9 @@ files_dir = '{}/web/base/static/base/ser'.format(home_dir)
 #if os.path.isdir('/media/parsa/Elements'):
 #	files_dir = '/media/parsa/Elements'
 
+def player(request, play_path):
+	play_path = '/'.join(play_path.split(' > ')[8:])
+	return render(request, 'base/player.html', {'path': play_path})
 
 def upload(request):
 	fs = FileSystemStorage()
@@ -114,7 +117,7 @@ def files_finder(directory):
 					data = EasyID3(entry.path)
 					name = data['title'][0]
 				except:
-					name = entry.name[:-4][0]
+					name = entry.name[:-4]
 
 				musics.append({'name': name, 'title': entry.name, 'path': (' > ').join(entry.path.split('/')), 'format':file_format, 'image_str': 'it.png'})
 
@@ -132,7 +135,7 @@ def files_finder(directory):
 				if entry.path[-3:] in ['mp3', 'm4a']:
 					add_file(entry, 'mp3')
 
-				elif entry.path[-3:] in ['png', 'jpeg', 'JPEG', 'jpg', 'PNG']:
+				elif entry.path.split('.')[-1] in ['png', 'jpeg', 'JPEG', 'jpg', 'PNG']:
 					add_file(entry, 'image')
 
 				elif entry.path[-3:] in ['mp4', 'mkv']:
@@ -167,19 +170,24 @@ def ser(directory):
 
 	def add_file_ser(entry, file_format):
 
-	    files.append({'title': entry.name, 'relpath': entry.path, 'path': entry.path, 'format':file_format})
+		files.append({'title': entry.name, 'relpath': entry.path, 'path': entry.path, 'format':file_format})
 
-	    # adding movies
-	    if file_format == 'video':
-	    	video.append({'title': entry.name, 'relpath': entry.path, 'path': (' > ').join(entry.path.split('/')), 'format':file_format})
+		# adding movies
+		if file_format == 'video':
+			
+			if entry.name[-3:] in ['mp4', 'mkv']:
+				video.append({'title': entry.name, 'relpath': entry.path, 'review': True, 'path': (' > ').join(entry.path.split('/')), 'format':file_format})
+			else:
+				video.append({'title': entry.name, 'relpath': entry.path, 'path': (' > ').join(entry.path.split('/')), 'format':file_format})
 
-	    # adding directory path's links
-	    elif file_format == 'directory':
-	    	dir_path.append({'title': entry.name, 'path': (' > ').join(entry.path.split('/')), 'format':file_format})
 
-	    # adding subtitles
-	    elif file_format == 'sub':
-	    	sub.append({'title': entry.name, 'path': (' > ').join(entry.path.split('/')), 'format':file_format})
+		# adding directory path's links
+		elif file_format == 'directory':
+			dir_path.append({'title': entry.name, 'path': (' > ').join(entry.path.split('/')), 'format':file_format})
+
+		# adding subtitles
+		elif file_format == 'sub':
+			sub.append({'title': entry.name, 'path': (' > ').join(entry.path.split('/')), 'format':file_format})
 
 
 	def add_file_from_ser(directory):

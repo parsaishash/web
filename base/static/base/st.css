@@ -7,27 +7,55 @@ table, th, td {
   margin: 1px;
 }
 
+.pas {
+	margin: 5px;
+        position: relative;
+        border: 2px solid green;        
+        border-radius: 10px;
+	padding: 10px;
+        background-color: rgb(230, 230, 230);
+}
 
+body {
+	background-color: rgb(20, 20, 20);
+	color:  #0099cc;
+}
+
+hr {
+	background-color: green;
+}
 
 @media only screen and (min-width: 1100px) {
-
+	.grid-container-5 {          
+		display: grid;
+		justify-content: space-between; 
+		grid-template-columns: 20% 20% 20% 20% 20%;
+	}
 	.file-container {
 	  border-radius: 10px;
-	  background-color: rgb(230, 230, 230);
+	  /*background-color: rgb(230, 230, 230);*/
+	  border: 2px solid green;
+	  color: white;
 	  position: relative;
 	  display: flex;
 	  padding: 10px;
 	  margin: 5px;
-	  box-shadow: 3px 3px 3px #aaaaaa;
+	  /*box-shadow: 3px 3px 3px #aaaaaa;*/
+	}
+
+	.file-container i {
+		color: #0099cc;
 	}
 
 	.file-container a {
 	  word-wrap: 20px;
+	  color:  #0099cc;
 	}
 
+	/*
 	.file-container:hover {
 	  background-color: rgb(230, 236, 248);
-	}
+	}*/
 
 	.file-container:hover .o {
 	  visibility: visible;
@@ -72,7 +100,7 @@ table, th, td {
 	  padding-top: 5px;
 	  border-bottom-right-radius: 10px;
 	  border-top-right-radius: 10px;
-	  background-color: rgb(80, 90, 90);
+	  background-color: rgb(50, 60, 60);
 	  position: fixed;
 
 	}
@@ -98,7 +126,7 @@ table, th, td {
 
 
 	.vertical-menu a.active {
-	  background-color: #4CAF50;
+	  background-color: green;
 	  color: white;
 	  float: right;
 	  padding: 10% 42px;
@@ -110,31 +138,52 @@ table, th, td {
 
 
 @media only screen and (max-width: 1100px) {
+	.grid-container-5 {          
+		display: grid;
+		justify-content: space-between; 
+		grid-template-columns: 50% 50%;
+	}
+
+
+
+
+
 	body {
 		width: 500%;
 		height: 500%;
 	}
 	.file-container {
 	  border-radius: 10px;
-	  background-color: rgb(230, 230, 230);
+	  border: 2px solid green;
+	  /*background-color: rgb(230, 230, 230);*/
 	  position: relative;
 	  display: flex;
 	  padding: 10px;
 	  margin: 5px;
-	  box-shadow: 3px 3px 3px #aaaaaa;
+	  /*box-shadow: 3px 3px 3px #aaaaaa;*/
 	}
 
 	.file-container a {
 	  word-wrap: 20px;
 	}
 
+
+	.file-container i {
+		color: #0099cc;
+	}
+	/*
 	.file-container:hover {
 	  background-color: rgb(230, 236, 248);
-	}
+	}*/
 
 	.file-container:hover .o {
 	  visibility: visible;
 	  transition: 2s;
+	}
+
+	.file-container a {
+	  word-wrap: 20px;
+	  color:  #0099cc;
 	}
 
 
@@ -174,7 +223,7 @@ table, th, td {
 		top: 5px;
 		padding: 7px;
 		border-radius: 10px;
-		background-color: rgb(80, 90, 90);
+		background-color: rgb(50, 50, 50);
 		overflow: hidden;
 		transition: top 0.3s;
 		z-index: 1;
@@ -208,7 +257,7 @@ table, th, td {
 		text-decoration: none;
 		font-size: 15px;
 		border-radius: 6px;
-		background-color: #4CAF50;
+		background-color: green;
 		color: white;
 	}
 
@@ -224,12 +273,13 @@ table, th, td {
 
 
 .image-container {
-  background-color: rgb(230, 230, 230);
+  /*background-color: rgb(230, 230, 230);*/
+  border: 2px solid green;
   position: relative;
   padding: 10%;
   text-align: center;
   margin: 3px;
-  border-radius: 4px;
+  border-radius: 8px;
 }
 
 .image-container img {
@@ -243,26 +293,33 @@ table, th, td {
 
 .image-container a {
   flex-wrap: wrap;
+  color: rgb(200, 200, 200);
   flex-direction: row;
 }
 
 
 
 
-
+/*
 .image-container:hover {
   background-color: rgb(230, 236, 248);
+
   box-shadow: all;
 }
-
+*/
 
 .music-image {
   border-radius: 8px;
   margin-right: 20px;
   width: 125px;
-  height: auto;
+  height: 125px;
 }
 
+video {
+	width: auto;
+	height: 200px;
+	border-radius: 10px;
+}
 
 .mid {
  	left: 40px;
@@ -281,11 +338,19 @@ i {
 }
 
 .log {
-  left: 20%;
-  top: 30px;
-  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 2px solid green;
+  padding: 20px;
+  top: 50px;
+  border-radius: 10px;
 }
 
+.filed {
+	border-radius: 10px;
+	border: 2px solid black;
+}
 
 .crop {
 	overflow:hidden;

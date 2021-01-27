@@ -9,6 +9,7 @@ urlpatterns = [
     path('', views.authen, name='authen'),
     path('wel/', views.wel, name='wel'),
     path('upload/', views.upload, name='upload'),
+    path('player/<str:play_path>', views.player, name='player'),
     path('download/<str:path>', views.down, name='down'),
     path('<str:wich_type>/home', views.home, name='home'),
     path('goـtoـdirectory/<str:path>/<str:wich_type>', views.go_to_directory, name='go_to_directory'), 

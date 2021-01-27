@@ -1,0 +1,23 @@
+{% load static %}
+{% get_static_prefix as STATIC_PREFIX %}
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Online Play</title>
+	<meta charset="UTF-8">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+	<style type="text/css">
+		video {
+			width: 100%;
+			height: 100%;		}
+	</style>
+
+
+	<video controls>
+		<source src="{{ STATIC_PREFIX }}base/ser/{{ path }}">
+	</video>
+
+</body>
+</html>

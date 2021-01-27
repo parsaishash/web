@@ -5,8 +5,16 @@
         <link rel="stylesheet" type="text/css" href="{% static 'base/st.css' %}">
     </head>
     <body>
+    	<style type="text/css">
+    		body {
+    			display: flex;
+    			justify-content: center;
+    			align-items: center;
+    			top: 30px;
+    		}
+    	</style>
     	<div class="log">
-    		<label><h3>Login to your drive</h3></label>
+    		<img src="{% static 'base/images.png' %}">
 	    	<form action="{% url 'base:wel' %}" id="ch" method="post">
 	    		{% csrf_token %}
 	    		<input type="username" placeholder="Username" name="username">
