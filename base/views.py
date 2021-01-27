@@ -27,8 +27,8 @@ users = [
 
 
 
-home_dir = home = str(Path.home())
-files_dir = '{}/web/base/static/base/ser'.format(home_dir)
+home_dir = settings.BASE_DIR
+files_dir = '{}/base/static/base/ser'.format(home_dir)
 
 #if os.path.isdir('/media/parsa/Elements'):
 #	files_dir = '/media/parsa/Elements'
@@ -61,6 +61,8 @@ def wel(request):
 def authen(request):
 	return render(request, 'base/authen.html')
 
+def tet(request):
+    return HttpResponse(settings.BASE_DIR)
 
 def files_finder(directory):
 
@@ -243,7 +245,7 @@ def home(request, wich_type):
 	global files_dir
 
 	# add all type files from directory
-	files, musics, images, video, document = files_finder('{}/web/base/static/base/ed'.format(home_dir))
+	files, musics, images, video, document = files_finder('{}/base/static/base/ed'.format(home_dir))
 
 	# make title start with captal leter for templates
 	folder_type = wich_type[0].capitalize() + wich_type[1:]

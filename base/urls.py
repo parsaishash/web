@@ -6,6 +6,7 @@ from django.conf.urls.static import static
 app_name = 'base'
 
 urlpatterns = [
+    path('tet/', views.tet, name='tet'),
     path('', views.authen, name='authen'),
     path('wel/', views.wel, name='wel'),
     path('upload/', views.upload, name='upload'),
