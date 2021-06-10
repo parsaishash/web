@@ -5,7 +5,6 @@ from django.conf import settings
 from django.core.files.storage import FileSystemStorage
 from django.contrib import messages
 
-
 from PIL import Image
 from io import BytesIO
 from mutagen.mp3 import MP3 as mp3
@@ -30,8 +29,6 @@ users = [
 home_dir = settings.BASE_DIR
 files_dir = '{}/base/static/base/ser'.format(home_dir)
 
-#if os.path.isdir('/media/parsa/Elements'):
-#	files_dir = '/media/parsa/Elements'
 
 def player(request, play_path):
 	play_path = '/'.join(play_path.split(' > ')[8:])
@@ -90,7 +87,7 @@ def files_finder(directory):
 						img = Image.open(BytesIO(s.get(i).data))
 						break
 
-				name = '/home/parsa/web/base/static/base/music_image/' + entry.name[:-3] + 'png'
+				name = '{}/base/static/base/music_image/'.format(home_dir) + entry.name[:-3] + 'png'
 				img.thumbnail((125, 125))
 				img.save(name)
 
@@ -267,7 +264,7 @@ def home(request, wich_type):
 		wich_type = document
 
 	elif wich_type == 'serials':
-		files, dir_path, video, sub = ser('{}/web/base/static/base/ser'.format(home_dir))
+		files, dir_path, video, sub = ser('{}/base/static/base/ser'.format(home_dir))
 		wich_type =  dir_path + video
 
 
