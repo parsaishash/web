@@ -6,81 +6,132 @@
 	<link rel="icon" href="{% static 'base/bash.png' %}">
 	<title>{{ type }}</title>
 	<meta charset="UTF-8">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="{% static 'base/st.css' %}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+    <!--<link rel="stylesheet" type="text/css" href="{% static 'base/st.css' %}">-->
 </head>
 
-<body>
+<!--<style type="text/css">
+	.dropdown-menu .a:focus {background: red; color:#000;}
 
-	<div class="vertical-menu">
+	.dropdown-menu .dropdown-item {display: inline-block; width: 100%;}
 
-		
-		
-		<a href="{% url 'base:wel' %}">Home</a>
+	.dropdown-menu .dropdown-item:active {background: #dc3545;}
+
+	@media only screen and (min-width: 500px) {
+		.grid {          
+			display: grid;
+			justify-content: space-between; 
+			grid-template-columns: 33% 33% 33%;
+		}
+	}
+	@media only screen and (max-width: 500px) {
+		.grid {
+			display: grid;
+			justify-content: space-between; 
+			grid-template-columns: 100%;
+		}
+	}
+
+	.grid-container-2 {
+		display: grid;
+		justify-content: space-between;
+		grid-template-columns: 50% 50%;
+	}
+</style>
+-->
+
+<body class="bg-dark">
+
+	<ul class="nav nav-pills nav-fill p-2">
+		<li class="nav-item">
+			<a href="{% url 'base:wel' %}" class="nav-link"><span class="glyphicon glyphicon-home" ></span>Home</a>
+		</li>
+
+
 		{% if type == 'Musics' %}
-			<a href="{% url 'base:home' 'musics' %}" class='active'>Music</a>
+			<li class="nav-item">
+				<a href="{% url 'base:home' 'musics' %}" class="nav-link active"><span class="glyphicon glyphicon-music" ></span> Music</a>
+			</li>
 		{% else %}
-			<a href="{% url 'base:home' 'musics' %}">Music</a>
+			<a href="{% url 'base:home' 'musics' %}" class="nav-link"><span class="glyphicon glyphicon-music" ></span> Music</a>
+
 		{% endif %}
 
 
 		{% if type == 'Images' %}
-			<a href="{% url 'base:home' 'images' %}" class='active'>Images</a>
+			<li class="nav-item">
+				<a href="{% url 'base:home' 'images' %}" class='nav-link active'><span class="glyphicon glyphicon-picture" ></span> Images</a>
+			</li>
 		{% else %}
-			<a href="{% url 'base:home' 'images' %}">Images</a>
+			<li class="nav-item">
+				<a href="{% url 'base:home' 'images' %}" class="nav-link"><span class="glyphicon glyphicon-picture" ></span> Images</a>
+			</li>
 		{% endif %}
 
 
 		{% if type == 'Document' %}
-			<a href="{% url 'base:home' 'document' %}" class='active'>Docs</a>
+			<li class="nav-item">
+				<a href="{% url 'base:home' 'document' %}" class='nav-link active'><span class="glyphicon glyphicon-file" ></span> Docs</a>
+			</li>
 		{% else %}
-			<a href="{% url 'base:home' 'document' %}">Docs</a>
+			<li class="nav-item">
+				<a href="{% url 'base:home' 'document' %}" class="nav-link"><span class="glyphicon glyphicon-file" ></span> Docs</a>
+			</li>
 		{% endif %}
 
 
 		{% if type == 'Serials' %}
-			<a href="{% url 'base:home' 'serials' %}" class='active'>Movies</a>
+			<li class="nav-item">
+				<a href="{% url 'base:home' 'serials' %}" class='nav-link active'><span class="glyphicon glyphicon-film" ></span> Movies</a>
+			</li>
+
 		{% else %}
-			<a href="{% url 'base:home' 'serials' %}">Movies</a>
+			<li class="nav-item">
+				<a href="{% url 'base:home' 'serials' %}" class="nav-link"><span class="glyphicon glyphicon-film" ></span> Movies</a>
+			</li>
 		{% endif %}
+	</ul> 
 
-	</div> 
+
+	
 
 
-	<div class="chat-container-2">
-		<h2>{{ type }}</h2>
-		<hr>
+	<div class="container-lg">
+		<h2 class="text-light">{{ type }}</h2>
+		<hr class="text-light">
 		{% if files %}
 			
 			<div class="grid-container">
 				{% for i in files %}
 						{% if i.format == 'directory' %}
-
 							<div class="file-container crop">
 								<div>
-								<img src="{{ STATIC_PREFIX }}base/folder.png" width="30" height="30">
-								<a href="{% url 'base:go_to_directory' i.path type %}">{{ i.title }}
-								</a>
-							</div>
+									<img src="{{ STATIC_PREFIX }}base/folder.png" width="30" height="30">
+									<a style="text-decoration-line: none;" class="text-light" href="{% url 'base:go_to_directory' i.path type %}">{{ i.title }}
+									</a>
+								</div>
 							</div>
 						{% endif %}
 				{% endfor %}
+				<hr class="text-light">
 			</div>
 
 
 			<div class="grid-container-2">
 			{% for i in files %}
 					{% if i.format == 'video' %}
-						<div class="file-container crop">
+						<div class="file-container row g-0">
 							{% if i.review %}
 								
-								<a href="{% url 'base:down' i.path %}">
-								<img src="{% static 'base/video.png' %}" width="30" height="30">
-								{{ i.title }}</a>
+								<a href="{% url 'base:down' i.path %}" style="text-decoration-line: none;" class="text-light">
+								<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="white" class="bi bi-play-btn" viewBox="0 0 16 16">
+								  <path d="M6.79 5.093A.5.5 0 0 0 6 5.5v5a.5.5 0 0 0 .79.407l3.5-2.5a.5.5 0 0 0 0-.814l-3.5-2.5z"/>
+								  <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4zm15 0a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4z"/>
+								</svg> {{ i.title|slice:"40" }}</a>
 								<hr>
 								
 							{% else %}
-								<a href="{% url 'base:down' i.path %}">
+								<a href="{% url 'base:down' i.path %}" style="text-decoration-line: none;" class="text-light">
 								<img src="{% static 'base/video.png' %}" width="30" height="30">
 								{{ i.title }}</a>
 							{% endif %}
@@ -97,7 +148,7 @@
 			<div class="grid-container">
 				{% for i in files %}
 						{% if i.format == 'sub' %}
-							<div class="file-container crop">
+							<div class="file-container crop text-light">
 								<a href="{% url 'base:down' i.path %}">
 								<img src="{% static 'base/pdf.png' %}" width="30" height="30">
 								{{ i.title }}</a>
@@ -106,70 +157,70 @@
 				{% endfor %}
 			</div>
 
-
-
-			
 			<div class="grid-container-2">
 				{% for i in files %}
 						{% if i.format == 'document' %}
-							<div class="file-container crop">
-								<a href="{% url 'base:down' i.path %}">
-								<img src="{% static 'base/pdf.png' %}" width="30" height="30">
+							<div class="p-1 m-1">
+								<a class="text-light" style="text-decoration-line: none;" href="{% url 'base:down' i.path %}">
+								<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-file-earmark-pdf" viewBox="0 0 16 16">
+  <path d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2zM9.5 3A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5.5v2z"/>
+  <path d="M4.603 14.087a.81.81 0 0 1-.438-.42c-.195-.388-.13-.776.08-1.102.198-.307.526-.568.897-.787a7.68 7.68 0 0 1 1.482-.645 19.697 19.697 0 0 0 1.062-2.227 7.269 7.269 0 0 1-.43-1.295c-.086-.4-.119-.796-.046-1.136.075-.354.274-.672.65-.823.192-.077.4-.12.602-.077a.7.7 0 0 1 .477.365c.088.164.12.356.127.538.007.188-.012.396-.047.614-.084.51-.27 1.134-.52 1.794a10.954 10.954 0 0 0 .98 1.686 5.753 5.753 0 0 1 1.334.05c.364.066.734.195.96.465.12.144.193.32.2.518.007.192-.047.382-.138.563a1.04 1.04 0 0 1-.354.416.856.856 0 0 1-.51.138c-.331-.014-.654-.196-.933-.417a5.712 5.712 0 0 1-.911-.95 11.651 11.651 0 0 0-1.997.406 11.307 11.307 0 0 1-1.02 1.51c-.292.35-.609.656-.927.787a.793.793 0 0 1-.58.029zm1.379-1.901c-.166.076-.32.156-.459.238-.328.194-.541.383-.647.547-.094.145-.096.25-.04.361.01.022.02.036.026.044a.266.266 0 0 0 .035-.012c.137-.056.355-.235.635-.572a8.18 8.18 0 0 0 .45-.606zm1.64-1.33a12.71 12.71 0 0 1 1.01-.193 11.744 11.744 0 0 1-.51-.858 20.801 20.801 0 0 1-.5 1.05zm2.446.45c.15.163.296.3.435.41.24.19.407.253.498.256a.107.107 0 0 0 .07-.015.307.307 0 0 0 .094-.125.436.436 0 0 0 .059-.2.095.095 0 0 0-.026-.063c-.052-.062-.2-.152-.518-.209a3.876 3.876 0 0 0-.612-.053zM8.078 7.8a6.7 6.7 0 0 0 .2-.828c.031-.188.043-.343.038-.465a.613.613 0 0 0-.032-.198.517.517 0 0 0-.145.04c-.087.035-.158.106-.196.283-.04.192-.03.469.046.822.024.111.054.227.09.346z"/>
+</svg>
 								{{ i.title }}</a>
-								<hr>
+								
 							</div>
 						{% endif %}
 				{% endfor %}
 			</div>
-			<div class="grid-container-2">
+
+			<div class="m-3 grid">
 			{% for i in files %}
 					{% if i.format == 'mp3' %}
-
-						<div class="file-container crop">
-							<img class="music-image" src="{{ STATIC_PREFIX }}base/music_image/{{ i.image_str }}">
-							
-							<br>
-							
-							<div class="mar-au">
-							<a href="{% url 'base:down' i.path %}">{{ i.name }} -- <i>{{ i.date }}</i></a>
-							<br>
-							<i>{{ i.artist }} -- ({{ i.genre }})</i>
-							<hr>
-							<audio controls="">
-								<source src="{{ STATIC_PREFIX }}base/ed/{{ i.title }}" type="">
-							</audio>
-
-							
-							</div>
+						<div class="card mb-3 border border-secondary bg-dark" style="max-width: 700px;">
+						  <div class="row g-0">
+						    <div class="col-md-4">
+						    	<a href="{% url 'base:down' i.path %}" style="text-decoration-line: none;">
+						      <img src="{{ STATIC_PREFIX }}base/music_image/{{ i.image_str }}" class="img-fluid rounded-start" alt="..."></a>
+						    </div>
+						    <div class="col-md-8">
+						      <div class="card-body">
+						        <a href="{% url 'base:down' i.path %}" style="text-decoration-line: none;"><h6 class="card-title text-light">{{ i.name|slice:":20" }}</h6></a><br>
+								<audio controls="">
+									<source src="{{ STATIC_PREFIX }}base/ed/{{ i.title }}" type="">
+								</audio>
+						      </div>
+						    </div>
+						  </div>
 						</div>
 					{% endif %}
+
 			{% endfor %}
 			</div>
 
-			<div class="grid-container">
-			{% for i in files %}
+			<div class="m-3 grid">
+				{% for i in files %}
 					{% if i.format == 'image' %}
-					
-						<div class="image-container crop">
-							<div>
-							<img src="{{ STATIC_PREFIX }}base/ed/{{ i.title }}">
+						<div class="shadow rounded rounded-3 m-2 border border-2 border-secondary">
+							<div class="">
+								<img src="{{ STATIC_PREFIX }}base/ed/{{ i.title }}" class="card-img-bottom img-fluid  rounded-top" alt="...">
 
-							<hr>
-							<a href="{% url 'base:down' i.path %}">
-							{{ i.title }}</a>
+								<div class="p-3">
+							    	<p class="card-text text-light">{{ i.title|slice:":30" }}</p>
+								</div>
+							</div>
+
+							<div class="p-3" >
+							  <a href="{% url 'base:down' i.path %}" class="btn btn-primary" style="">Download</a>
 							</div>
 						</div>
-					
 					{% endif %}
-			{% endfor %}
-
-			
-		</div>
+				{% endfor %}
+			</div>
 						
 					
 			
 		{% else %}
-			<div class="alert alert-primary" role="alert">
+			<div class="alert alert-info" role="alert">
 			  There is no file!
 			</div>
 		{% endif %}

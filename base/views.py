@@ -58,9 +58,6 @@ def wel(request):
 def authen(request):
 	return render(request, 'base/authen.html')
 
-def tet(request):
-    return HttpResponse(settings.BASE_DIR)
-
 def files_finder(directory):
 
 	files = []
@@ -77,8 +74,8 @@ def files_finder(directory):
 		if file_format == 'image':
 			images.append({'title': entry.name, 'relpath': entry.path, 'path': (' > ').join(entry.path.split('/')), 'format':file_format})
 
+		#adding music's images
 		elif file_format == 'mp3':
-
 			try:
 
 				s = ID3(entry.path)
@@ -130,7 +127,7 @@ def files_finder(directory):
 	def add_file_from(directory):
 		for entry in os.scandir(directory):
 			if entry.is_file():
-				if entry.path[-3:] in ['mp3', 'm4a']:
+				if entry.path[-3:] in ['mp3', 'm4a', 'mp4', 'MP4']:
 					add_file(entry, 'mp3')
 
 				elif entry.path.split('.')[-1] in ['png', 'jpeg', 'JPEG', 'jpg', 'PNG']:

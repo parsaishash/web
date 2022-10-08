@@ -7,10 +7,14 @@ table, th, td {
   margin: 1px;
 }
 
+.link {
+	color: purple;
+}
+
 .pas {
 	margin: 5px;
         position: relative;
-        border: 2px solid green;        
+        border: 2px solid green;
         border-radius: 10px;
 	padding: 10px;
         background-color: rgb(230, 230, 230);
@@ -22,8 +26,14 @@ body {
 }
 
 hr {
-	background-color: green;
-}
+		display: block; 
+		height: 0.5px;
+    border: 0; 
+    border-top: 1px solid green;
+    margin: 1em 0;
+    padding: 0;
+  }
+
 
 @media only screen and (min-width: 1100px) {
 	.grid-container-5 {          
@@ -32,14 +42,14 @@ hr {
 		grid-template-columns: 20% 20% 20% 20% 20%;
 	}
 	.file-container {
-	  border-radius: 10px;
+	  border-radius: 8px;
 	  /*background-color: rgb(230, 230, 230);*/
 	  border: 2px solid green;
 	  color: white;
 	  position: relative;
 	  display: flex;
 	  padding: 10px;
-	  margin: 5px;
+	  margin: 10px;
 	  /*box-shadow: 3px 3px 3px #aaaaaa;*/
 	}
 
@@ -91,9 +101,47 @@ hr {
     	right: 8%;
     	position: absolute;
 	}
+
+	.vertical-menu {
+		top: 50px;
+		width: 140px;
+		position: fixed;
+		background-color: rgb(50, 60, 60);
+		border-radius: 0px 10px 10px 0px;
+		padding: 2px 2px 2px 0px;
+	}
+
+	.vertical-menu a {
+		color: #f2f2f2;
+		display: block;
+		text-decoration: none;
+		padding: 10% 10px;
+		width: 100%;
+		float: right;
+		border-radius: 0px 8px 8px 0px;
+		margin: 2px;
+	}
+
+	.vertical-menu a:hover {
+		background-color: #ddd;
+		transition: 0.8s;
+	  color: black;
+	}
+
+	.vertical-menu a.active {
+		background-color: green;
+	  color: white;
+	}
+
+	span {
+		padding-right: 8px;
+	}
+
+
+	/*
 		
 	.vertical-menu {
-	  width: 140px;
+	  width: 160px;
 	  top: 50px;
 	  padding-bottom: 5px;
 	  padding-right: 5px;
@@ -108,7 +156,7 @@ hr {
 	.vertical-menu a {
 	  float: right;
 	  color: #f2f2f2;
-	  padding: 10% 42px;
+	  padding: 10% 25px;
 	  text-decoration: none;
 	  font-size: 15px;
 	  border-bottom-right-radius: 6px;
@@ -129,9 +177,9 @@ hr {
 	  background-color: green;
 	  color: white;
 	  float: right;
-	  padding: 10% 42px;
+	  padding: 10% 25px;
 	  width: 100%;
-	}
+	}*/
 }
 
 
@@ -215,14 +263,12 @@ hr {
 	}
 
 
-
+  
 	.vertical-menu {
-		position: fixed;
-		right: 5px;
-		left: 5px;
-		top: 5px;
-		padding: 7px;
-		border-radius: 10px;
+		padding: 10px;
+		
+		border-radius: 5px;
+
 		background-color: rgb(50, 50, 50);
 		overflow: hidden;
 		transition: top 0.3s;
@@ -230,10 +276,11 @@ hr {
 		transition: top 0.3s;
 	}
 	.vertical-menu a {
-		float: right;
+		float: all;
+		padding: 9px;
+		margin: 5px;
 		color: #f2f2f2;
 		text-align: center;
-		padding: 10px 30px;
 		text-decoration: none;
 		font-size: 15px;
 		border-radius: 6px;
@@ -250,20 +297,16 @@ hr {
 	  
 
 	.vertical-menu a.active {
-		float: right;
 		color: white;
 		text-align: center;
-		padding: 10px 30px;
 		text-decoration: none;
 		font-size: 15px;
 		border-radius: 6px;
 		background-color: green;
 		color: white;
 	}
-
+ 
 }
-
-
 
 
 
@@ -274,12 +317,12 @@ hr {
 
 .image-container {
   /*background-color: rgb(230, 230, 230);*/
-  border: 2px solid green;
+  border: 1.9px solid green;
   position: relative;
   padding: 10%;
   text-align: center;
-  margin: 3px;
-  border-radius: 8px;
+  margin: 7px;
+  border-radius: 7px;
 }
 
 .image-container img {
@@ -287,7 +330,7 @@ hr {
   padding: all;
   word-wrap: break-word;
   width: auto;
-  height: 130px;
+  height: 170px;
   max-width: 100%;
 }
 
@@ -309,7 +352,7 @@ hr {
 */
 
 .music-image {
-  border-radius: 8px;
+  border-radius: 7px;
   margin-right: 20px;
   width: 125px;
   height: 125px;
@@ -343,11 +386,8 @@ i {
   align-items: center;
   border: 2px solid green;
   padding: 20px;
-<<<<<<< HEAD
   top: 50px;
-=======
->>>>>>> a8e19f68e1f80dab6a4a325d391f923b4cec7549
-  border-radius: 10px;
+  border-radius: 20px;
 }
 
 .filed {
@@ -356,7 +396,7 @@ i {
 }
 
 .crop {
-	overflow:hidden;
+	overflow: hidden;
 }​
 
 div.scrollmenu {
@@ -410,3 +450,7 @@ div.scrollmenu td {
   background-color: #ddd;
 }
 
+hr {
+	background-color: green;
+	color: green;
+}

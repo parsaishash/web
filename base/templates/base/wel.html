@@ -6,71 +6,64 @@
 	<link rel="icon" href="{% static 'base/images.png' %}">
 	<title>Home</title>
 	<meta charset="UTF-8">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="{% static 'base/st.css' %}">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+
+    <!--<link rel="stylesheet" type="text/css" href="{% static 'base/st.css' %}">-->
 </head>
-<body>
+<body class="bg-dark">
 
-	<div class="vertical-menu">
-		<a href="{% url 'base:wel' %}" class='active'>Home</a>
+	
+	<ul class="nav nav-pills nav-fill p-2">
+		<li class="nav-item">
+		<a href="{% url 'base:wel' %}" class="nav-link active"><span class="glyphicon glyphicon-home" ></span> Home</a>
+		</li>
 
+		<li class="nav-item">
+		<a href="{% url 'base:home' 'musics' %}" class="nav-link"><span class="glyphicon glyphicon-music" ></span> Music</a>
+		</li>
 
-		{% if type == 'Musics' %}
-			<a href="{% url 'base:home' 'musics' %}" class='active'>Music</a>
-		{% else %}
-			<a href="{% url 'base:home' 'musics' %}">Music</a>
-		{% endif %}
+		<li class="nav-item">
+		<a href="{% url 'base:home' 'images' %}" class="nav-link"><span class="glyphicon glyphicon-picture" ></span> Images</a>
+		</li>
 
+		<li class="nav-item">
+		<a href="{% url 'base:home' 'document' %}" class="nav-link"><span class="glyphicon glyphicon-file" ></span> Docs</a>
+		</li>
+		
+		<li class="nav-item">
+		<a href="{% url 'base:home' 'serials' %}" class="nav-link"><span class="glyphicon glyphicon-film" ></span> Movies</a>
+		</li>
+	</ul>
 
-		{% if type == 'Images' %}
-			<a href="{% url 'base:home' 'images' %}" class='active'>Images</a>
-		{% else %}
-			<a href="{% url 'base:home' 'images' %}">Images</a>
-		{% endif %}
+	<div class="container-lg">
+		<div>
+			{% if messages %}
+				{% for message in messages %}
+					<div class="alert alert-success">{{ message }}</div>
+				{% endfor %}
+			{% endif %}
 
-
-		{% if type == 'Document' %}
-			<a href="{% url 'base:home' 'document' %}" class='active'>Docs</a>
-		{% else %}
-			<a href="{% url 'base:home' 'document' %}">Docs</a>
-		{% endif %}
-
-
-		<!--{% if type == 'Video' %}
-			<a href="{% url 'base:home' 'video' %}" class='active'>Video</a>
-		{% else %}
-			<a href="{% url 'base:home' 'video' %}">Video</a>
-		{% endif %}-->
-
-		{% if type == 'Serials' %}
-			<a href="{% url 'base:home' 'serials' %}" class='active'>Movies</a>
-		{% else %}
-			<a href="{% url 'base:home' 'serials' %}">Movies</a>
-		{% endif %}
-
+			<h2 class="text-light">Home</h2>
+			<div class="text-light">
+				you can upload you file here and find theme in different categories on left the left menu
+			</div>
+			<hr class="text-light">
+			
+			
+			<br>
+			
+			<form action="{% url 'base:upload' %}" method="post" enctype="multipart/form-data">
+				{% csrf_token %}
+				<div>
+					<div><input type="file" name="myfile" id="myfile"></div><br>
+					<button type="submit" class="btn btn-success" value="Upload">Upload</button>
+				</div>
+				
+			</form>
+		</div>
 	</div>
 
-	<div class="chat-container-2">
-		{% if messages %}
-			{% for message in messages %}
-				<div class="alert alert-success">{{ message }}</div>
-			{% endfor %}
-		{% endif %}
+	
 
-		<h2>Home</h2>
-		<hr>
-		
-		
-		<br>
-		
-		<form action="{% url 'base:upload' %}" method="post" enctype="multipart/form-data">
-			{% csrf_token %}
-			<input type="file" name="myfile" id="myfile" />
-			<button type="submit" class="btn btn-success" value="Upload">Upload</button>
-		</form>
-
-
-
-	</div>
 	<script src="https://vjs.zencdn.net/7.10.2/video.js"></script>
 </body>
