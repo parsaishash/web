@@ -17,13 +17,6 @@ import base64
 from io import StringIO
 
 
-users = [
-	{'username': 'parsa', 'password': '1382'},
-	{'username': 'danialbehzadi', 'password': 'danialbehzadi'},
-	{'username': 'amirali', 'password': '1382'},
-	{'username': 'main', 'password': 'main1234'},
-]
-
 
 
 home_dir = settings.BASE_DIR
